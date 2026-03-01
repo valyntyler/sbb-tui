@@ -1,16 +1,34 @@
 # SBB-TUI
 
+TUI client for Switzerland's public transports timetables, inspidered by the SBB/CFF/FFS [app](https://www.sbb.ch/).
+
+# ❓Why
+
+> I often work in the train, passing through remote regions of Switzerland where I'll have to wait up to an entire minute to finally be able to load the SBB website/app and get the much needed information about my next connection (I have a cheap cellular data subscription). Someday I fell onto the incredible [Swiss public transport API](https://transport.opendata.ch/docs.html) and decided it was the perfect occasion to learn how to create TUIs.
+
+# 📦 Install
+
+```sh
+# homebrew
+brew tap necrom4/homebrew-tap && brew install sbb-tui
+# or go
+go install github.com/necrom4/sbb-tui
+```
+
+# 🚀 Usage
+
+1. Run `sbb-tui`
+2. Input **departure** and **arrival** locations (navigate with `tab`).
+3. Add optional information such as **date**, **time**, and **whether** those are for departure or arrival.
+4. Press `Enter` to view the results (navigate with arrows).
+
+# 🏆 Roadmap
+
+- Get to a clean state (UI resizing, help
+
 ## 🏆 ROADMAP
 
-- [x] Departure/Arrival boolean switch
-- [x] Vehicle model icons
-- [x] Operator icons
-- [x] Platforms
-- [x] Visual representation of stops
-  - [x] Length represents time
-- [x] Richtung
-- [x] Separate results into multiple boxes
-  - [x] Separate results box into two sub boxes, left box contains vertical scrollable results, each in a box, right contains further details
+- [ ] **Stationboard** mode, returns a list of the next departures at a specific station.
 - [ ] Warning flags
 - [ ] Wrong input handling
 - [ ] Better UI screen size handling
