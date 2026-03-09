@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/Necrom4/sbb-tui/compare/v1.1.0...v1.2.0) (2026-03-09)
+
+
+### Features
+
+* add base flags ([dd19f14](https://github.com/Necrom4/sbb-tui/commit/dd19f14177d64bd07a0b4118e9407fffbf37b1df))
+* **ui:** add `no-nerdfont` flag and create two groups of icons ([4eeee6e](https://github.com/Necrom4/sbb-tui/commit/4eeee6e375ab958e7b39938cc8e5d105f721183b))
+
 # [1.1.0](https://github.com/Necrom4/sbb-tui/compare/v1.0.3...v1.1.0) (2026-03-01)
 
 
