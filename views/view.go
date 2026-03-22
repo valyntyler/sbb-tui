@@ -450,8 +450,8 @@ func (m *model) updateInputs(msg tea.Msg) tea.Cmd {
 			val := t.Value()
 
 			if msg.Type == tea.KeyBackspace {
-				if len(val) == 5 || len(val) == 8 {
-					t.SetValue(val[:len(val)-1])
+				if len(val) == 6 || len(val) == 9 {
+					t.SetValue(val[:len(val)-2])
 					return nil
 				}
 			}
@@ -510,8 +510,8 @@ func (m *model) updateInputs(msg tea.Msg) tea.Cmd {
 			s := msg.String()
 			val := t.Value()
 
-			if msg.Type == tea.KeyBackspace && len(val) == 3 {
-				t.SetValue(val[:1])
+			if msg.Type == tea.KeyBackspace && len(val) == 4 {
+				t.SetValue(val[:2])
 				return nil
 			}
 
