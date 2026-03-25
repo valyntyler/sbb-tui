@@ -15,6 +15,7 @@ import (
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/x/ansi"
 )
 
 var (
@@ -656,10 +657,13 @@ func (m model) renderHeaderItem(idx int) string {
 
 	if item.kind == KindInput {
 		input := m.inputs[item.index]
+		view := input.View()
 		if input.ShowSuggestions {
-			style = style.Width(lipgloss.Width(input.Prompt) + input.Width)
+			// Clip text to prevent line wrapping.
+			maxView := lipgloss.Width(input.Prompt) + input.Width
+			view = ansi.Truncate(view, maxView, "")
 		}
-		return style.Render(input.View())
+		return style.Render(view)
 	}
 
 	icon := " "
