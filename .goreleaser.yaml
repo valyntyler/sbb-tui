@@ -15,9 +15,13 @@ builds:
     goos:
       - linux
       - darwin
+      - windows
 
 archives:
   - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
     name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
