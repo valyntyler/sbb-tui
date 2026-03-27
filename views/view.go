@@ -301,10 +301,6 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		inputWidth := max(remaining/2, 1)
 		m.inputs[0].Width = inputWidth
 		m.inputs[1].Width = inputWidth
-		if gap := m.width - lipgloss.Width(m.renderHeader()); gap > 0 {
-			m.inputs[0].Width += (gap + 1) / 2
-			m.inputs[1].Width += gap / 2
-		}
 
 	case tea.KeyMsg:
 		switch msg.String() {
