@@ -295,8 +295,6 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	case tea.WindowSizeMsg:
 		m.width, m.height = msg.Width, msg.Height
-		// Set initial input widths based on fixed header elements, then
-		// measure the actual rendered header and correct for any difference.
 		remaining := m.width - m.headerFixedWidth()
 		inputWidth := max(remaining/2, 1)
 		m.inputs[0].Width = inputWidth
@@ -492,21 +490,20 @@ func (m *model) updateInputs(msg tea.Msg) tea.Cmd {
 				}
 			}
 
+			// date/time input: auto-insert `.`/`:` and block non existent values
 			if len(s) == 1 && s >= "0" && s <= "9" {
 				switch len(val) {
-				// Day: DD (positions 0-1)
 				case 0:
 					if s > "3" {
 						return nil
 					}
 				case 1:
 					if val[0] == '0' && s == "0" {
-						return nil // block day 00
+						return nil
 					}
 					if val[0] == '3' && s > "1" {
-						return nil // block days 32-39
+						return nil
 					}
-				// 1st month digit: auto-insert ".", validate (0 or 1)
 				case 2:
 					if s > "1" {
 						return nil
@@ -515,15 +512,13 @@ func (m *model) updateInputs(msg tea.Msg) tea.Cmd {
 					t.SetCursor(len(val) + 2)
 					return nil
 				case 3:
-				// 2nd month digit: val = "DD.M#" where val[3] is 1st month digit
 				case 4:
 					if val[3] == '0' && s == "0" {
-						return nil // block month 00
+						return nil
 					}
 					if val[3] == '1' && s > "2" {
-						return nil // block months 13-19
+						return nil
 					}
-				// 1st year digit: auto-insert ".", validate (only 1 or 2)
 				case 5:
 					if s > "2" {
 						return nil
@@ -531,7 +526,6 @@ func (m *model) updateInputs(msg tea.Msg) tea.Cmd {
 					t.SetValue(val + "." + s)
 					t.SetCursor(len(val) + 2)
 					return nil
-				// Year: remaining digits (positions 7-9)
 				case 6, 7, 8, 9:
 				default:
 					return nil
@@ -550,10 +544,8 @@ func (m *model) updateInputs(msg tea.Msg) tea.Cmd {
 				return nil
 			}
 
-			// Only process numeric runes for the following logic
 			if len(s) == 1 && s >= "0" && s <= "9" {
 				switch len(val) {
-				// Hours: HH
 				case 0:
 					if s > "2" {
 						return nil
@@ -562,7 +554,6 @@ func (m *model) updateInputs(msg tea.Msg) tea.Cmd {
 					if val == "2" && s > "3" {
 						return nil
 					}
-				// Minutes: auto-insert ":", validate 1st minute digit (0-5)
 				case 2:
 					if s > "5" {
 						return nil
@@ -570,7 +561,6 @@ func (m *model) updateInputs(msg tea.Msg) tea.Cmd {
 					t.SetValue(val + ":" + s)
 					t.SetCursor(5)
 					return nil
-				// 2nd minute digit (0-9, no restriction)
 				case 3, 4:
 				default:
 					return nil
@@ -652,7 +642,7 @@ func completeTime(partial string) string {
 	return partial
 }
 
-// toAPIDate converts a Swiss-format date (DD.MM.YYYY) to the API format (YYYY-MM-DD).
+// Convert swiss date format to API complient
 func toAPIDate(swiss string) string {
 	parts := strings.Split(swiss, ".")
 	if len(parts) != 3 {
