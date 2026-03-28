@@ -1,3 +1,17 @@
+# [1.8.0](https://github.com/Necrom4/sbb-tui/compare/v1.7.2...v1.8.0) (2026-03-28)
+
+
+### Bug Fixes
+
+* handle simple connections without vehicles ([90b31d3](https://github.com/Necrom4/sbb-tui/commit/90b31d3dd2cbc0723677c1043da549cff155f081))
+* prefer platform info from the boarded section ([495b7dd](https://github.com/Necrom4/sbb-tui/commit/495b7dda746770425392735a34728d355b2b5391))
+* use boarded sections for simple connection times ([aaf1172](https://github.com/Necrom4/sbb-tui/commit/aaf1172e8afb4d35cc5fc67ecd2220ecb867f7f0))
+
+
+### Features
+
+* move walk time into the simple connection timeline ([59c1eda](https://github.com/Necrom4/sbb-tui/commit/59c1edadd3bc248f616b92493dca8d2766313f41))
+
 ## [1.7.2](https://github.com/Necrom4/sbb-tui/compare/v1.7.1...v1.7.2) (2026-03-28)
 
 
