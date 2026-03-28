@@ -27,6 +27,7 @@ type fileConfig struct {
 // Theme defines color values for the TUI appearance.
 type Theme struct {
 	Text           string `yaml:"text"`
+	ErrorText      string `yaml:"ErrorText"`
 	GhostText      string `yaml:"ghostText"`
 	ActiveBorder   string `yaml:"activeBorder"`
 	InactiveBorder string `yaml:"inactiveBorder"`
@@ -47,6 +48,7 @@ type Theme struct {
 func DefaultTheme() Theme {
 	return Theme{
 		Text:           "#FFFFFF",
+		ErrorText:      "#D82E20",
 		GhostText:      "#888888",
 		ActiveBorder:   "#D82E20",
 		InactiveBorder: "#484848",

@@ -24,13 +24,14 @@ const (
 
 type styles struct {
 	text           lipgloss.Style
+	errorText      lipgloss.Style
+	ghostText      lipgloss.Style
 	active         lipgloss.Style
 	inactive       lipgloss.Style
 	detailedResult lipgloss.Style
 	dimmedBorder   lipgloss.Style
 	helpKey        lipgloss.Style
 	helpDesc       lipgloss.Style
-	ghostText      lipgloss.Style
 	warning        lipgloss.Style
 	warningBold    lipgloss.Style
 	vehicleIcon    lipgloss.Style
@@ -41,10 +42,13 @@ type styles struct {
 }
 
 func newStyles(theme config.Theme) styles {
-	textColor := lipgloss.Color(theme.Text)
 	return styles{
 		text: lipgloss.NewStyle().
-			Foreground(textColor),
+			Foreground(lipgloss.Color(theme.Text)),
+		errorText: lipgloss.NewStyle().
+			Foreground(lipgloss.Color(theme.ErrorText)),
+		ghostText: lipgloss.NewStyle().
+			Foreground(lipgloss.Color(theme.GhostText)),
 		active: lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(lipgloss.Color(theme.ActiveBorder)).
@@ -68,8 +72,6 @@ func newStyles(theme config.Theme) styles {
 			Padding(0, 1),
 		helpDesc: lipgloss.NewStyle().
 			Foreground(lipgloss.Color(theme.GhostText)),
-		ghostText: lipgloss.NewStyle().
-			Foreground(lipgloss.Color(theme.GhostText)),
 		warning: lipgloss.NewStyle().
 			Foreground(lipgloss.Color(theme.WarningFlag)),
 		warningBold: lipgloss.NewStyle().
@@ -88,7 +90,7 @@ func newStyles(theme config.Theme) styles {
 		logo: lipgloss.NewStyle().
 			Foreground(lipgloss.Color(theme.Logo)),
 		bold: lipgloss.NewStyle().
-			Foreground(textColor).
+			Foreground(lipgloss.Color(theme.Text)).
 			Bold(true),
 	}
 }

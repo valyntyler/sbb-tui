@@ -52,6 +52,7 @@ OS default config paths are also supported (such as `~/Library/Application Suppo
 # default configuration
 theme:
   text:           "#FFFFFF"
+  errorText:      "#D82E20"
   ghostText:      "#888888"
   activeBorder:   "#D82E20"
   inactiveBorder: "#484848"
