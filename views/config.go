@@ -9,14 +9,14 @@ import (
 )
 
 type Theme struct {
-	Primary    string `yaml:"primary"`
-	Text       string `yaml:"text"`
-	Border     string `yaml:"border"`
-	Muted      string `yaml:"muted"`
-	Vehicle    string `yaml:"vehicle"`
-	Company    string `yaml:"company"`
-	Warning    string `yaml:"warning"`
-	KeysBg     string `yaml:"keysBg"`
+	Primary string `yaml:"primary"`
+	Text    string `yaml:"text"`
+	Border  string `yaml:"border"`
+	Muted   string `yaml:"muted"`
+	Vehicle string `yaml:"vehicle"`
+	Company string `yaml:"company"`
+	Warning string `yaml:"warning"`
+	KeysBg  string `yaml:"keysBg"`
 }
 
 type FileConfig struct {
@@ -25,14 +25,14 @@ type FileConfig struct {
 
 func DefaultTheme() Theme {
 	return Theme{
-		Primary:    "#D82E20",
-		Text:       "#FFFFFF",
-		Border:     "#862010",
-		Muted:      "#888888",
-		Vehicle:    "#315086",
-		Company:    "#484848",
-		Warning:    "#dc5e4a",
-		KeysBg:     "#484848",
+		Primary: "#D82E20",
+		Text:    "#FFFFFF",
+		Border:  "#862010",
+		Muted:   "#888888",
+		Vehicle: "#315086",
+		Company: "#484848",
+		Warning: "#dc5e4a",
+		KeysBg:  "#484848",
 	}
 }
 

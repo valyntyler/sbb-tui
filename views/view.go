@@ -51,9 +51,7 @@ const (
 	minTermHeight = 24
 )
 
-var (
-	noStyle = lipgloss.NewStyle()
-)
+var noStyle = lipgloss.NewStyle()
 
 func (m model) focusedStyle() lipgloss.Style {
 	return lipgloss.NewStyle().
