@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/Necrom4/sbb-tui/compare/v1.8.2...v1.8.3) (2026-03-28)
+
+
+### Bug Fixes
+
+* **ui.style:** use style of other error messages ([74bab81](https://github.com/Necrom4/sbb-tui/commit/74bab810a2ec1b5190772018e391350d3dc57bc1))
+
 ## [1.8.2](https://github.com/Necrom4/sbb-tui/compare/v1.8.1...v1.8.2) (2026-03-28)
 
 
