@@ -207,7 +207,7 @@ func (m appModel) renderSimpleConnection(c model.Connection, index int, width in
 	}
 
 	if firstVehicle == -1 {
-		return style.Render("\n  Connection details unavailable\n")
+		return m.styles.errorText.Width(width).Padding(1, 2).Render("Connection details unavailable")
 	}
 
 	lineContentWidth := max(width-style.GetHorizontalFrameSize()-2, 0)
