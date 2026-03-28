@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/Necrom4/sbb-tui/compare/v1.8.0...v1.8.1) (2026-03-28)
+
+
+### Bug Fixes
+
+* **views:** change icons and text to be more similar to SBB app ([780bdcb](https://github.com/Necrom4/sbb-tui/commit/780bdcb8362d48668048bb45714f678855cd9e96))
+
 # [1.8.0](https://github.com/Necrom4/sbb-tui/compare/v1.7.2...v1.8.0) (2026-03-28)
 
 
