@@ -1059,7 +1059,7 @@ func formatDuration(duration string) string {
 		hours := parts[0][3:]
 		return hours + "h " + minutes + "m"
 	}
-	return minutes + "min"
+	return minutes + " min"
 }
 
 func (m model) formatDelay(delay int) string {
