@@ -150,6 +150,7 @@ type iconSet struct {
 	keyEnter  string
 	keySpace  string
 	keyUpDw   string
+	keyUPDW   string
 	keyRight  string
 	keyEsc    string
 }
@@ -166,6 +167,7 @@ func newIconSet(noNerdFont bool) iconSet {
 		keyEnter:  "↵",
 		keySpace:  "␣",
 		keyUpDw:   "↕",
+		keyUPDW:   "⇧↕",
 		keyRight:  "→",
 		keyEsc:    "⎋",
 	}
@@ -706,6 +708,7 @@ func (m model) renderHelpBar() string {
 		{m.icons.keyEnter, "search"},
 		{m.icons.keySpace, "toggle"},
 		{m.icons.keyUpDw, "results"},
+		{m.icons.keyUPDW, "scroll"},
 		{m.icons.keyRight, "complete"},
 		{m.icons.keyEsc, "quit"},
 	}
