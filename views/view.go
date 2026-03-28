@@ -70,33 +70,46 @@ var (
 )
 
 var (
-	// Styles
 	noStyle = lipgloss.NewStyle()
-
-	focusedStyle = lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			BorderForeground(sbbRed).
-			Padding(0, 1)
-
-	blurredStyle = lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			BorderForeground(sbbMidGray).
-			Padding(0, 1)
-
-	detailedResultStyle = lipgloss.NewStyle().
-				Border(lipgloss.RoundedBorder()).
-				BorderForeground(sbbRed).
-				Padding(fullConnPaddV, fullConnPaddH)
-
-	helpKeyStyle = lipgloss.NewStyle().
-			Bold(true).
-			Foreground(sbbWhite).
-			Background(sbbMidGray).
-			Padding(0, 1)
-
-	helpDescStyle = lipgloss.NewStyle().
-			Foreground(sbbGray)
 )
+
+func (m model) color(value string) lipgloss.Color {
+	return lipgloss.Color(value)
+}
+
+func (m model) focusedStyle() lipgloss.Style {
+	return lipgloss.NewStyle().
+		Border(lipgloss.RoundedBorder()).
+		BorderForeground(m.color(m.theme.Primary)).
+		Padding(0, 1)
+}
+
+func (m model) blurredStyle() lipgloss.Style {
+	return lipgloss.NewStyle().
+		Border(lipgloss.RoundedBorder()).
+		BorderForeground(m.color(m.theme.Border)).
+		Padding(0, 1)
+}
+
+func (m model) detailedResultStyle() lipgloss.Style {
+	return lipgloss.NewStyle().
+		Border(lipgloss.RoundedBorder()).
+		BorderForeground(m.color(m.theme.Primary)).
+		Padding(fullConnPaddV, fullConnPaddH)
+}
+
+func (m model) helpKeyStyle() lipgloss.Style {
+	return lipgloss.NewStyle().
+		Bold(true).
+		Foreground(m.color(m.theme.Text)).
+		Background(m.color(m.theme.KeysBg)).
+		Padding(0, 1)
+}
+
+func (m model) helpDescStyle() lipgloss.Style {
+	return lipgloss.NewStyle().
+		Foreground(m.color(m.theme.Muted))
+}
 
 type focusable struct {
 	kind  int
@@ -434,7 +447,7 @@ func (m model) View() string {
 		minW := minTermWidth
 		msg := fmt.Sprintf("Terminal too small (%dx%d)\nMinimum size: %dx%d", m.width, m.height, minW, minTermHeight)
 		return lipgloss.Place(m.width, m.height, lipgloss.Center, lipgloss.Center,
-			noStyle.Foreground(sbbRed).Bold(true).Render(msg))
+			noStyle.Foreground(m.color(m.theme.Warning)).Bold(true).Render(msg))
 	}
 
 	header := m.renderHeader()
@@ -453,7 +466,7 @@ func (m model) View() string {
 		header,
 		noStyle.
 			Border(lipgloss.RoundedBorder()).
-			BorderForeground(sbbDarkRed).
+			BorderForeground(m.color(m.theme.Border)).
 			Width(m.contentWidth()).
 			Height(m.resultsHeight()).
 			Padding(0, rsltMrgn).
@@ -701,7 +714,7 @@ func (m model) renderHelpBar() string {
 
 	var parts []string
 	for _, k := range keys {
-		parts = append(parts, helpKeyStyle.Render(k.key)+" "+helpDescStyle.Render(k.desc))
+		parts = append(parts, m.helpKeyStyle().Render(k.key)+" "+m.helpDescStyle().Render(k.desc))
 	}
 
 	return " " + strings.Join(parts, "   ")
@@ -709,9 +722,9 @@ func (m model) renderHelpBar() string {
 
 func (m model) renderHeaderItem(idx int) string {
 	item := m.headerOrder[idx]
-	style := blurredStyle
+	style := m.blurredStyle()
 	if m.tabIndex == idx {
-		style = focusedStyle
+		style = m.focusedStyle()
 	}
 
 	if item.kind == KindInput {
@@ -751,7 +764,7 @@ func (m model) renderResults() string {
 	}
 
 	if m.errorMsg != "" {
-		return "\n  " + noStyle.Foreground(sbbRed).Render(m.errorMsg)
+		return "\n  " + noStyle.Foreground(m.color(m.theme.Warning)).Render(m.errorMsg)
 	}
 
 	if len(m.connections) == 0 {
@@ -778,9 +791,9 @@ func (m model) renderStartScreen() string {
 	}
 	logo = strings.TrimRight(logo, "\n")
 
-	coloredLogo := noStyle.Foreground(sbbWhite).Render(logo)
+	coloredLogo := noStyle.Foreground(m.color(m.theme.Text)).Render(logo)
 
-	text := noStyle.Foreground(sbbGray).Render("Enter stations above to see timetables")
+	text := noStyle.Foreground(m.color(m.theme.Muted)).Render("Enter stations above to see timetables")
 
 	block := lipgloss.JoinVertical(lipgloss.Center, text, "", coloredLogo)
 
@@ -831,7 +844,7 @@ func (m model) renderFullConnection(c models.Connection, width int) string {
 		visLines = visLines[scrollY : scrollY+boxHeight]
 	}
 
-	return detailedResultStyle.Width(width).Height(boxHeight).Render(strings.Join(visLines, "\n"))
+	return m.detailedResultStyle().Width(width).Height(boxHeight).Render(strings.Join(visLines, "\n"))
 }
 
 func (m model) renderJourneySection(section models.Section, width int, isFirst, isLast bool) []string {
@@ -858,10 +871,10 @@ func (m model) renderJourneySection(section models.Section, width int, isFirst, 
 	spacingLine := fmt.Sprintf("%s  %s", indent, m.icons.vertLine)
 	lines = append(lines, spacingLine)
 
-	vehicleIcon := noStyle.Background(sbbBlue).Foreground(sbbWhite).Render(" " + m.icons.vhc + " ")
-	vehicleCategory := noStyle.Background(sbbRed).Foreground(sbbWhite).Bold(true).
+	vehicleIcon := noStyle.Background(m.color(m.theme.Vehicle)).Foreground(m.color(m.theme.Text)).Render(" " + m.icons.vhc + " ")
+	vehicleCategory := noStyle.Background(m.color(m.theme.Primary)).Foreground(m.color(m.theme.Text)).Bold(true).
 		Render(section.Journey.Category + " " + section.Journey.Number)
-	company := noStyle.Background(sbbWhite).Foreground(sbbBlack).
+	company := noStyle.Background(m.color(m.theme.Company)).Foreground(m.color(m.theme.Text)).
 		Render(section.Journey.Operator)
 	vehicleLine := fmt.Sprintf("%s  %s  %s %s %s", indent, m.icons.vertLine, vehicleIcon, vehicleCategory, company)
 	lines = append(lines, vehicleLine)
@@ -931,7 +944,7 @@ func (m model) formatStationLine(timeStr string, delay int, symbol, station, pla
 	delayPart := ""
 	if delay > 0 {
 		delayStr := fmt.Sprintf("+%d", delay)
-		delayPart = noStyle.Foreground(sbbRed).Bold(true).Render(fmt.Sprintf("%*s", delayCol, delayStr))
+		delayPart = noStyle.Foreground(m.color(m.theme.Warning)).Bold(true).Render(fmt.Sprintf("%*s", delayCol, delayStr))
 	} else {
 		delayPart = strings.Repeat(" ", delayCol)
 	}
@@ -983,10 +996,10 @@ func (m model) renderSimpleConnection(c models.Connection, index int, width int)
 		}
 	}
 
-	vehicleIcon := noStyle.Background(sbbBlue).Foreground(sbbWhite).Render(" " + m.icons.vhc + " ")
-	vehicleCategory := noStyle.Background(sbbRed).Foreground(sbbWhite).Bold(true).
+	vehicleIcon := noStyle.Background(m.color(m.theme.Vehicle)).Foreground(m.color(m.theme.Text)).Render(" " + m.icons.vhc + " ")
+	vehicleCategory := noStyle.Background(m.color(m.theme.Primary)).Foreground(m.color(m.theme.Text)).Bold(true).
 		Render(c.Sections[firstVehicle].Journey.Category + " " + c.Sections[firstVehicle].Journey.Number)
-	company := noStyle.Background(sbbWhite).Foreground(sbbBlack).
+	company := noStyle.Background(m.color(m.theme.Company)).Foreground(m.color(m.theme.Text)).
 		Render(c.Sections[firstVehicle].Journey.Operator)
 	endStop := noStyle.Render(c.Sections[firstVehicle].Journey.To)
 
@@ -995,8 +1008,8 @@ func (m model) renderSimpleConnection(c models.Connection, index int, width int)
 	departure := noStyle.Bold(true).Render(dep)
 	arrival := noStyle.Bold(true).Render(arr)
 
-	departureDelay := formatDelay(c.Sections[firstVehicle].Departure.Delay)
-	arrivalDelay := formatDelay(c.Sections[firstVehicle].Arrival.Delay)
+	departureDelay := m.formatDelay(c.Sections[firstVehicle].Departure.Delay)
+	arrivalDelay := m.formatDelay(c.Sections[firstVehicle].Arrival.Delay)
 
 	stopsLineWidth := max(width-stopsLineFixedWidth, stopsLineMinWidth)
 	stopsLine := noStyle.Bold(true).Render(m.renderStopsLine(c, stopsLineWidth))
@@ -1029,9 +1042,9 @@ func (m model) renderSimpleConnection(c models.Connection, index int, width int)
 		duration,
 	)
 
-	style := blurredStyle.Width(width)
+	style := m.blurredStyle().Width(width)
 	if index == m.resultIndex {
-		style = focusedStyle.Width(width)
+		style = m.focusedStyle().Width(width)
 	}
 
 	return style.Render(content)
@@ -1052,9 +1065,9 @@ func formatDuration(duration string) string {
 	return minutes + "min"
 }
 
-func formatDelay(delay int) string {
+func (m model) formatDelay(delay int) string {
 	if delay > 0 {
-		return noStyle.Foreground(sbbRed).Bold(true).Render(fmt.Sprintf(" +%d", delay))
+		return noStyle.Foreground(m.color(m.theme.Warning)).Bold(true).Render(fmt.Sprintf(" +%d", delay))
 	}
 	return ""
 }
