@@ -65,14 +65,7 @@ godoc -http=:6060
 [[hooks.enter]]
 # Verify all tools defined in [tools] are actually installed
 script = """
-tools=$(mise config get tools | cut -d' ' -f1)
-
-missing=""
-for tool in $tools; do
-  if ! mise which "$tool" > /dev/null 2>&1; then
-    missing="$missing $tool"
-  fi
-done
+missing=$(mise ls --missing --offline | awk '{print $1}' | tr '\n' ' ')
 
 if [ -n "$missing" ]; then
   echo "${C_RED}[WARNING]${S_RESET}"
