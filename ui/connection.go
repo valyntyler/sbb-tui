@@ -155,7 +155,7 @@ func (m appModel) renderWalkSection(section model.Section) []string {
 		walkDuration = renderLink(walkDuration, url)
 	}
 
-	walkLine := fmt.Sprintf("           %s %s'", m.icons.walk, walkDuration)
+	walkLine := fmt.Sprintf("%s  %s %s'", strings.Repeat(" ", 5), m.icons.walk, walkDuration)
 	lines = append(lines, walkLine)
 
 	return lines
