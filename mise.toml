@@ -5,6 +5,23 @@ golangci-lint = "latest"
 pre-commit = "latest"
 "go:golang.org/x/tools/cmd/godoc" = "latest"
 
+[env]
+# Styles
+S_RESET = "\u001b[0m"
+S_BOLD = "\u001b[1m"
+S_URL = "\u001b[4m"
+
+# Colors
+C_RED = "\u001b[31m"
+C_GREEN = "\u001b[32m"
+C_MAGENTA = "\u001b[35m"
+C_BLUE = "\u001b[34m"
+
+# Hyperlink Parts
+LINK_START = "\u001b]8;;"
+LINK_SEP = "\u001b\\"
+LINK_END = "\u001b]8;;\u001b\\"
+
 [tasks.init]
 description = "Install hooks and setup environment"
 run = "pre-commit install"
@@ -39,7 +56,11 @@ run = "golangci-lint run"
 [tasks.docs]
 description = "Serve godoc at http://localhost:6060"
 quiet = true
-run = 'echo "Open \033]8;;http://localhost:6060/pkg/github.com/necrom4/sbb-tui/\033\http://localhost:6060/pkg/github.com/necrom4/sbb-tui/\033]8;;\033\\033[0m" && godoc -http=:6060'
+run = '''
+URL="http://localhost:6060/pkg/github.com/necrom4/sbb-tui/"
+echo "Open ${LINK_START}${URL}${LINK_SEP}${URL}${LINK_END}"
+godoc -http=:6060
+'''
 
 [[hooks.enter]]
 # Verify all tools defined in [tools] are actually installed
@@ -54,17 +75,17 @@ for tool in $tools; do
 done
 
 if [ -n "$missing" ]; then
-  echo "\\033[31m[WARNING]\\033[0m"
-  echo "Tools defined in mise.toml are not installed:\\033[35m$missing\\033[0m"
-  echo "Run '\\033[32mmise install\\033[0m' to set up your environment."
+  echo "${C_RED}[WARNING]${S_RESET}"
+  echo "Tools defined in mise.toml are not installed: ${C_MAGENTA}$missing${S_RESET}"
+  echo "Run '${C_GREEN}mise install${S_RESET}' to set up your environment."
 fi
 """
 
 [[hooks.enter]]
 script = """
 if [ ! -f ".git/hooks/pre-commit" ] || ! grep -q "pre-commit" ".git/hooks/pre-commit"; then
-  echo "\\033[31m[WARNING]\\033[0m"
-  echo "Git pre-commit \\033[35mhooks\\033[0m not initialized!"
-  echo "Run '\\033[32mmise run init\\033[0m' to enable pre-commit hooks."
+  echo "${C_RED}[WARNING]${S_RESET}"
+  echo "Git pre-commit ${C_MAGENTA}hooks${S_RESET} not initialized!"
+  echo "Run '${C_GREEN}mise run init${S_RESET}' to enable pre-commit hooks."
 fi
 """
