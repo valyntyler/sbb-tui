@@ -1,18 +1,9 @@
 # Theme Presets
 
-You can customize the look of **sbb-tui** by creating a config file:
-
-```
-$HOME/.config/sbb-tui/config.yaml
-```
-
-# Theme config file example
-
----
-
-## Default
+## Default SBB theme
 
 ```yaml
+# SBB
 theme:
   text:           "#FFFFFF"
   errorText:      "#D82E20"
@@ -32,11 +23,10 @@ theme:
   logo:           "#FFFFFF"
 ```
 
----
-
 ## Gruvbox
 
 ```yaml
+# Gruvbox
 theme:
   text:           "#EBDBB2"
   errorText:      "#FB4934"
@@ -56,11 +46,10 @@ theme:
   logo:           "#EBDBB2"
 ```
 
----
-
 ## Tokyo Night
 
 ```yaml
+# Tokyo Night
 theme:
   text:           "#C0CAF5"
   errorText:      "#F7768E"
@@ -80,11 +69,10 @@ theme:
   logo:           "#7AA2F7"
 ```
 
----
-
 ## Nord
 
 ```yaml
+# Nord
 theme:
   text:           "#ECEFF4"
   errorText:      "#BF616A"
@@ -104,11 +92,10 @@ theme:
   logo:           "#88C0D0"
 ```
 
----
-
 ## Simple Dark
 
 ```yaml
+# Simple Dark
 theme:
   text:           "#FFFFFF"
   errorText:      "#FF5555"
@@ -128,11 +115,10 @@ theme:
   logo:           "#323232"
 ```
 
----
-
 ## Basic Yellow
 
 ```yaml
+# Basic Yellow
 theme:
   text:           "#FFF9E6"
   errorText:      "#FF5733"
@@ -152,11 +138,10 @@ theme:
   logo:           "#FFFFFF"
 ```
 
----
-
 ## Basic Blue
 
 ```yaml
+# Basic Blue
 theme:
   text:           "#EAF2F8"
   errorText:      "#E74C3C"
@@ -176,11 +161,10 @@ theme:
   logo:           "#FFFFFF"
 ```
 
----
-
 ## Basic Green
 
 ```yaml
+# Basic Green
 theme:
   text:           "#E9F7EF"
   errorText:      "#F4D03F"
@@ -200,11 +184,10 @@ theme:
   logo:           "#FFFFFF"
 ```
 
----
-
 ## Basic Purple
 
 ```yaml
+# Basic Purple
 theme:
   text:           "#F5EEF8"
   errorText:      "#F39C12"
