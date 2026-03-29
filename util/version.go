@@ -43,6 +43,7 @@ func latestVersion() (string, error) {
 	return release.TagName, nil
 }
 
+// NewerVersion returns the latest release tag if it is newer than current.
 func NewerVersion(current string) (string, error) {
 	if current == "dev" {
 		return "", nil
