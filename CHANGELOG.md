@@ -1,3 +1,11 @@
+# [1.11.0](https://github.com/Necrom4/sbb-tui/compare/v1.10.0...v1.11.0) (2026-03-29)
+
+
+### Features
+
+* **icons:** add differntiation between platform and stop ([c174fc2](https://github.com/Necrom4/sbb-tui/commit/c174fc28c9e14582bb16d6a9a28360c234bf1b13))
+* **ui:** add platform alignment logic ([25ea4fe](https://github.com/Necrom4/sbb-tui/commit/25ea4fe48faa408ef2ac731b1aa3010da2b1aeab))
+
 # [1.10.0](https://github.com/Necrom4/sbb-tui/compare/v1.9.0...v1.10.0) (2026-03-29)
 
 
