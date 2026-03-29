@@ -1,3 +1,17 @@
+# [1.10.0](https://github.com/Necrom4/sbb-tui/compare/v1.9.0...v1.10.0) (2026-03-29)
+
+
+### Features
+
+* add update checker ([c52f668](https://github.com/Necrom4/sbb-tui/commit/c52f66841ac1a4c499c6ffc52e3b561895dc2354))
+
+# [1.9.0](https://github.com/Necrom4/sbb-tui/compare/v1.8.3...v1.9.0) (2026-03-29)
+
+
+### Features
+
+* added THEMES.md file with examples ([c2280f3](https://github.com/Necrom4/sbb-tui/commit/c2280f3b3a71568c16e7a8df56e092c332760130))
+
 ## [1.8.3](https://github.com/Necrom4/sbb-tui/compare/v1.8.2...v1.8.3) (2026-03-28)
 
 
