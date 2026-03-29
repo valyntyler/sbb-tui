@@ -93,21 +93,6 @@ Flags:
 
 > I often work in the train, passing through remote regions of Switzerland where I'll have to wait up to an entire minute to finally be able to load the SBB website/app and get the much needed information about my next connection (I have a cheap cellular data subscription). Someday I fell onto the incredible [Swiss public transport API](https://transport.opendata.ch/docs.html) and decided it was the perfect occasion to learn how to create TUIs.
 
-## 📝 TODO
-
-- [ ] **Stationboard** mode, returns a list of the next departures at a specific station.
-- [ ] **Via** input field, allows adding an intermediary station.
-- [ ] Connection warnings
-- [ ] Better keymaps/navigation logic
-- [ ] Better keymap help
-- [ ] Suggestions when writing strings without accent (writing "zurich", "Zürich" isn't suggested)
-- [ ] Revise UI for not-so-wide terminals
-- [ ] Scroll icons as hint in border of scrollable detailedRender window
-- [ ] Only autocomplete with cursor at last character, otherwise move cursor right
-- [ ] Shorten date/time fields by one character length by either extending cursor placement to character before right border, or by removing cursor when finished at end of input CharLimit
-- [ ] Better error messages when date/time flags are given non-conforming strings
-- [ ] Protect date/time inputs from delete->reinserts in the middle of the string, breaks
-
 ## Star History
 
 <a href="https://www.star-history.com/?repos=necrom4%2Fsbb-tui&type=date&legend=top-left">
