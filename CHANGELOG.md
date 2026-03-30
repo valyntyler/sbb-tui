@@ -1,3 +1,10 @@
+## [1.11.4](https://github.com/Necrom4/sbb-tui/compare/v1.11.3...v1.11.4) (2026-03-30)
+
+
+### Bug Fixes
+
+* **ui.autosuggestions:** suggest even when not exact text ([d4a787d](https://github.com/Necrom4/sbb-tui/commit/d4a787d36c70c243e2b1a7b6e9d61b681551099f)), closes [#30](https://github.com/Necrom4/sbb-tui/issues/30)
+
 ## [1.11.3](https://github.com/Necrom4/sbb-tui/compare/v1.11.2...v1.11.3) (2026-03-29)
 
 
