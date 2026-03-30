@@ -4,22 +4,20 @@
 
 ## How to contribute to SBB-TUI
 
-#### **Did you find a bug?**
+#### **Issues**
 
 - **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/necrom4/sbb-tui/issues).
+- If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/necrom4/sbb-tui/issues/new). Be sure to include:
+  - **Title and clear description** with as much relevant information as possible
+  - A **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring. (**screenshots** appreciated)
 
-- If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/necrom4/sbb-tui/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring.
+#### **Pull Requests**
 
-#### **Did you write a feature or a patch that fixes a bug?**
-
-- Open a new GitHub pull request with your code.
-
-- Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.
-
-- **WARNING**: PRs must adhere to the following set of rules to be accepted.<br>**Don't worry**, if yours doesn't, I'll generally give an explanation so you can modify your commits and prepare the PR correctly.
-  - Split your PR into very **granular** commits, each defining a **single** change. Summarize each change in the commit's subject and write an in depth explanation in the body if necessary. No one should have to look at your code to understand what it does.
-  - Comment your code if necessary, but don't overdo it. Function names should be enough, if there's a small chunk of code that may not be understandable at first sight, explain what it does with a comment above.
-  - Enable **pre-commit** hooks! Those allow linting, formatting and more before committing! Install `mise` to help you install the necessary tools.
-  - Read and comply with [godoc](https://go.dev/blog/godoc). The linter will check your missing comments. You can also run `mise run docs` to view the current state of the API documentation.
+- Start by creating an **Issue** addressing the bug/feature, create a **Fork** and start coding. If the idea for the change is accepted, you'll have the green light to open a PR with your code.
+- Ensure the PR description clearly describes the problem and solution. Include the relevant issue number.
+- **WARNING**: Install [mise](https://mise.jdx.dev/), it will help you setup your environment to properly start committing. The [mise.toml](https://github.com/Necrom4/sbb-tui/blob/master/mise.toml) file has a command to setup the pre-commit hooks and install the formatter, linter and docs checker, which the hooks rely on.
+- Write **granular** commits each defining a single change. Titles must be meaningful and commit bodies should include in depth explanations if necessary. (No one should have to look at your code to understand what it does). Follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- Be aware that we are using [SemVer](https://semver.org/), your commit types must hence follow that logic. (e.g. `feat:` bumps a minor `vX.+1.X` version, `fix:` bumps a patch `vX.X.+1` and other commits do not generate a new release of the TUI.)
+- Comment your code according to [godoc](https://go.dev/blog/godoc) but don't overdo it, a good function name should in theory be enough. Also comment small chunks of code that aren't easily understandable at first sight, if applicable.
 
 Thanks for wanting to improve this fabulous tool!
