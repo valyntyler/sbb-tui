@@ -6,6 +6,7 @@ pre-commit = "latest"
 "go:golang.org/x/tools/cmd/godoc" = "latest"
 "go:golang.org/x/tools/cmd/goimports" = "latest"
 yq = "latest"
+markdownlint-cli2 = "latest"
 
 [env]
 # Styles
@@ -46,6 +47,21 @@ run = '''
 URL="http://localhost:6060/pkg/github.com/necrom4/sbb-tui/?m=all"
 echo "Open ${_LINK_START}${URL}${_LINK_SEP}${URL}${_LINK_END}"
 godoc -http=:6060
+'''
+
+[tasks."lint:markdown"]
+# Task defined in mise (instead of pre-commit hook) because we don't want it to fail, just warn.
+quiet = true
+usage = """
+arg "[files]" var=#true help="Files to lint, please include glob '!CONTRIBUTING'"
+flag "--fix" help="Fix errors"
+"""
+run = '''
+if [ -z "${usage_files}" ]; then
+  markdownlint-cli2 "**/*.md" "!CHANGELOG.md" ${usage_fix:+--fix}
+else
+  markdownlint-cli2 ${usage_files} ${usage_fix:+--fix}
+fi
 '''
 
 [[hooks.enter]]
