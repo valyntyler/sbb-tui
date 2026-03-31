@@ -10,8 +10,7 @@
         packages = rec {
           default = sbb-tui;
           sbb-tui = pkgs.buildGoModule {
-            pname = "sbb-tui";
-            version = "1.12.1";
+            name = "sbb-tui";
             src = ./.;
             vendorHash = "sha256-K4DOu3rfSlKAa5JNKCzWWpnWZlXXxtN5Po7p1Spqe1w=";
           };
