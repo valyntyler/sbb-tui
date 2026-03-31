@@ -70,22 +70,23 @@ Add your optional config at `$HOME/.config/sbb-tui/config.yaml`
 
 ```yaml
 # default configuration
-theme:
-  text:           "#FFFFFF"
-  errorText:      "#D82E20"
-  ghostText:      "#888888"
-  activeBorder:   "#D82E20"
-  inactiveBorder: "#484848"
-  warningFlag:    "#D82E20"
-  keysFg:         "#FFFFFF"
-  keysBg:         "#484848"
-  vehicleFg:      "#FFFFFF"
-  vehicleBg:      "#2E3279"
-  modelFg:        "#FFFFFF"
-  modelBg:        "#D82E20"
-  companyFg:      "#484848"
-  companyBg:      "#FFFFFF"
-  logo:           "#FFFFFF"
+ui:
+  theme:
+    text:           "#FFFFFF"
+    errorText:      "#D82E20"
+    ghostText:      "#888888"
+    activeBorder:   "#D82E20"
+    inactiveBorder: "#484848"
+    warningFlag:    "#D82E20"
+    keysFg:         "#FFFFFF"
+    keysBg:         "#484848"
+    vehicleFg:      "#FFFFFF"
+    vehicleBg:      "#2E3279"
+    modelFg:        "#FFFFFF"
+    modelBg:        "#D82E20"
+    companyFg:      "#484848"
+    companyBg:      "#FFFFFF"
+    logo:           "#FFFFFF"
 ```
 
 > More **themes** can be found at [`docs/themes.md`](https://github.com/Necrom4/sbb-tui/blob/master/docs/themes.md)

@@ -22,8 +22,13 @@ type Config struct {
 	CurrentVersion string
 }
 
-type fileConfig struct {
+// UIConfig groups all UI-related settings.
+type UIConfig struct {
 	Theme Theme `yaml:"theme"`
+}
+
+type fileConfig struct {
+	UI UIConfig `yaml:"ui"`
 }
 
 // Theme defines color values for the TUI appearance.
@@ -86,30 +91,40 @@ func configFilePath() (string, error) {
 	return filepath.Join(cfgDir, "sbb-tui", "config.yaml"), nil
 }
 
-// LoadTheme reads the config file and returns a Theme with defaults merged.
-func LoadTheme() (Theme, error) {
-	theme := DefaultTheme()
-
+// loadFile reads and parses the config file, returning a raw fileConfig.
+func loadFile() (fileConfig, error) {
 	path, err := configFilePath()
 	if err != nil {
-		return theme, fmt.Errorf("loading theme: %w", err)
+		return fileConfig{}, fmt.Errorf("loading config: %w", err)
 	}
 
 	data, err := os.ReadFile(path)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			return theme, nil
+			return fileConfig{}, nil
 		}
-		return theme, fmt.Errorf("loading theme: reading %s: %w", path, err)
+		return fileConfig{}, fmt.Errorf("loading config: reading %s: %w", path, err)
 	}
 
 	var cfg fileConfig
 	if err := yaml.Unmarshal(data, &cfg); err != nil {
-		return theme, fmt.Errorf("loading theme: parsing %s: %w", path, err)
+		return fileConfig{}, fmt.Errorf("loading config: parsing %s: %w", path, err)
+	}
+
+	return cfg, nil
+}
+
+// LoadTheme reads the config file and returns a Theme with defaults merged.
+func LoadTheme() (Theme, error) {
+	theme := DefaultTheme()
+
+	fc, err := loadFile()
+	if err != nil {
+		return theme, err
 	}
 
 	// NOTE: update mergeTheme when adding new Theme fields.
-	theme = mergeTheme(theme, cfg.Theme)
+	theme = mergeTheme(theme, fc.UI.Theme)
 	return theme, nil
 }
 
