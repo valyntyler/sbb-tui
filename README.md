@@ -54,6 +54,9 @@ cd sbb-tui
 go build
 ```
 
+> [!WARNING]
+> Due to the first release being [v1.0.0](https://github.com/Necrom4/sbb-tui/releases/tag/v1.0.0), `v1.X.X` is considered experimental/unstable. What that mostly means is that breaking changes won't trigger a MAJOR version bump, but the [`CHANGELOG.md`](https://github.com/Necrom4/sbb-tui/blob/master/CHANGELOG.md) clearly documents them.
+
 ## 🚀 Usage
 
 1. Run `sbb-tui`
